@@ -1,0 +1,66 @@
+# =====================================================
+# 2D Plane Stress Neo-Hookean Cantilever Benchmark
+# =====================================================
+
+subsection Material Properties
+  # Material: E = 1.0 MPa, nu = 0.49, rho = 1100 kg/m^3
+  # Lamé parameters:
+  #   mu = E/(2(1+nu)) = 1.0e6/(2*1.49) = 335,570 Pa
+  #   lambda = E*nu/((1+nu)(1-2nu)) = 1.0e6*0.49/(1.49*0.02) = 16,442,953 Pa
+  
+  set lambda  = 16442953.0   # Pa
+  set mu      = 335570.0      # Pa
+  set density = 1100.0        # kg/m^3
+end
+
+subsection Time Integration
+  # Newmark-beta parameters (average acceleration method)
+  set beta  = 0.25
+  set gamma = 0.5
+  
+  # Time stepping
+  set time step  = 0.01   # seconds
+  set total time = 4.0    # seconds
+end
+
+subsection Damping
+  # No damping for benchmark
+  set alpha M = 0.0
+  set alpha K = 0.0
+end
+
+subsection Loading
+  # Half-sine pulse: Fy(t) = -50*sin(pi*t/0.5) for 0 <= t <= 0.5s
+  # Line load: fy = Fy/W = -50/0.1 = -500 N/m (peak)
+  
+  set peak force = 50.0       # N (total force)
+  set ramp time  = 0.5        # seconds (duration of half-sine pulse)
+  set thickness  = 0.1        # m (out-of-plane thickness for plane stress)
+end
+
+subsection Mesh
+  # Cantilever beam geometry
+  set length = 1.0   # m (x-direction)
+  set height = 0.1   # m (y-direction, centered at y=0)
+  
+  # Mesh refinement
+  set global refinement = 4    # Additional uniform refinement
+  set subdivisions x    = 10   # Initial subdivisions in x
+  set subdivisions y    = 1    # Initial subdivisions in y
+end
+
+subsection Solver
+  # Newton-Raphson parameters
+  set max newton iterations = 20
+  
+  # Linear solver
+  set linear solver tolerance      = 1.0e-12
+  set linear solver max iterations = 2000
+end
+
+subsection Output
+  # Output control
+  set output directory = output_benchmark
+  set output interval  = 1     # Output every N time steps
+  set save csv logs    = true
+end

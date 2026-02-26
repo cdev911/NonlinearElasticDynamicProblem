@@ -1,0 +1,45 @@
+# Build directories
+build/
+cmake-build-*/
+out/
+
+# CMake files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+*.cmake
+
+# Compiled objects and executables
+*.o
+*.a
+*.so
+*.dylib
+*.exe
+NeoHookElasticProblem
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Output and results
+output_benchmark/
+time_step_study/
+*.csv
+*.vtu
+*.pvd
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+
+# Temporary files
+*.tmp
+*.log
